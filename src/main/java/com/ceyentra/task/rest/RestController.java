@@ -15,7 +15,7 @@ public class RestController {
     private ItemService itemService;
 
     @Autowired
-    public RestController(ItemService theItemService){
+    public RestController(ItemService theItemService) {
 
         itemService = theItemService;
     }
@@ -29,7 +29,7 @@ public class RestController {
     @GetMapping("/{id}")
     public Items getItem(@PathVariable int id) {
 
-        Items theItem =itemService.findBYId(id);
+        Items theItem = itemService.findBYId(id);
         if (theItem == null) {
             throw new RuntimeException("ItemCode not found - " + id);
         }
@@ -38,7 +38,7 @@ public class RestController {
     }
 
     @PostMapping()
-    public Items addItems(@RequestBody Items theItem){
+    public Items addItems(@RequestBody Items theItem) {
         theItem.setId(0);
         itemService.save(theItem);
         return theItem;

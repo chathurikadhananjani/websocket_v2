@@ -14,7 +14,7 @@ public class ItemServiceImpl implements ItemService {
     private ItemRepository itemRepository;
 
     @Autowired
-    public ItemServiceImpl(ItemRepository theItemRepository){
+    public ItemServiceImpl(ItemRepository theItemRepository) {
         itemRepository = theItemRepository;
     }
 
@@ -26,13 +26,12 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public Items findBYId(int theId) {
         Optional<Items> result = itemRepository.findById(theId);
-        Items theItem=null;
-        if (result.isPresent()){
-            theItem= result.get();
+        Items theItem = null;
+        if (result.isPresent()) {
+            theItem = result.get();
 
-        }
-        else {
-            throw new RuntimeException("Did not fond the item code "+theId);
+        } else {
+            throw new RuntimeException("Did not fond the item code " + theId);
         }
         return theItem;
 

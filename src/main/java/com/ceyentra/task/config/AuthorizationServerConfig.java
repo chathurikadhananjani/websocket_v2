@@ -14,7 +14,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
 @EnableAuthorizationServer
-public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter{
+public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
     static final String CLIENT_ID = "client";
     static final String CLIENT_SECRET = "secret";
     static final String GRANT_TYPE_PASSWORD = "password";
@@ -24,8 +24,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     static final String ITEM_READ = "item:read";
     static final String ITEM_WRITE = "item:write";
     static final String TRUST = "trust";
-    static final int ACCESS_TOKEN_VALIDITY_SECONDS = 1*60*60;
-    static final int REFRESH_TOKEN_VALIDITY_SECONDS = 6*60*60;
+    static final int ACCESS_TOKEN_VALIDITY_SECONDS = 1 * 60 * 60;
+    static final int REFRESH_TOKEN_VALIDITY_SECONDS = 6 * 60 * 60;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -49,7 +49,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .inMemory()
                 .withClient(CLIENT_ID)
                 .secret(CLIENT_SECRET)
-                .authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT )
+                .authorizedGrantTypes(GRANT_TYPE_PASSWORD, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT)
                 .scopes(ITEM_READ, ITEM_WRITE, TRUST)
                 .accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_SECONDS).
                 refreshTokenValiditySeconds(REFRESH_TOKEN_VALIDITY_SECONDS);
@@ -61,10 +61,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .authenticationManager(authenticationManager)
                 .accessTokenConverter(accessTokenConverter());
     }
-
-
-
-
 
 
 }

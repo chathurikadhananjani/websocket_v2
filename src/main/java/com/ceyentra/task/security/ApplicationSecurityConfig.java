@@ -1,7 +1,6 @@
 package com.ceyentra.task.security;
 
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.context.annotation.Bean;
@@ -33,6 +32,7 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
         this.passwordEncoder = passwordEncoder;
 
     }
+
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
@@ -48,11 +48,10 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .authorizeRequests()
                 //.antMatchers("/login").permitAll()
-                .antMatchers(HttpMethod.DELETE,"/api/items/**").hasAuthority(ApplicationUserPermission.ITEM_WRITE.getPermission())
-                .antMatchers(HttpMethod.POST,"/api/items/**").hasAuthority(ApplicationUserPermission.ITEM_WRITE.getPermission())
-                .antMatchers(HttpMethod.PUT,"/api/items/**").hasAuthority(ApplicationUserPermission.ITEM_WRITE.getPermission())
-                .antMatchers(HttpMethod.GET,"/api/items**").hasAnyRole(admin.name(), buyer.name())
-
+                .antMatchers(HttpMethod.DELETE, "/api/items/**").hasAuthority(ApplicationUserPermission.ITEM_WRITE.getPermission())
+                .antMatchers(HttpMethod.POST, "/api/items/**").hasAuthority(ApplicationUserPermission.ITEM_WRITE.getPermission())
+                .antMatchers(HttpMethod.PUT, "/api/items/**").hasAuthority(ApplicationUserPermission.ITEM_WRITE.getPermission())
+                .antMatchers(HttpMethod.GET, "/api/items**").hasAnyRole(admin.name(), buyer.name())
 
 
                 .anyRequest()
@@ -69,13 +68,13 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     @Bean
-    protected UserDetailsService userDetailsService(){
-        UserDetails buyerUser= User.builder()
-               .username("john")
-               .password(passwordEncoder.encode("test123"))
+    protected UserDetailsService userDetailsService() {
+        UserDetails buyerUser = User.builder()
+                .username("john")
+                .password(passwordEncoder.encode("test123"))
                 .authorities(buyer.getGrantedAuthorities())
-              // .roles(ApplicationUserRole.buyer.name())
-               .build();
+                // .roles(ApplicationUserRole.buyer.name())
+                .build();
 
         UserDetails adminUser = User.builder()
                 .username("mary")
@@ -83,13 +82,11 @@ public class ApplicationSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorities(admin.getGrantedAuthorities())
                 //.roles(ApplicationUserRole.admin.name())
                 .build();
-   return new InMemoryUserDetailsManager(
-           buyerUser,
-           adminUser
-     );
+        return new InMemoryUserDetailsManager(
+                buyerUser,
+                adminUser
+        );
     }
-
-
 
 
 //    @Override

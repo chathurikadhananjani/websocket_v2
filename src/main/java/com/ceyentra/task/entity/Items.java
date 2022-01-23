@@ -20,7 +20,7 @@ public class Items {
     @Column(name = "price")
     private int price;
 
-    public Items(){
+    public Items() {
 
     }
 
